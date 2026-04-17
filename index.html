@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#dfeafb" />
+    <title>Memory Box</title>
+    <meta
+      name="description"
+      content="A soft romantic Memory Box web app for a first anniversary."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Memory Box | First Anniversary" />
+    <meta property="og:description" content="A soft, private memory box full of our first anniversary moments." />
+    <meta property="og:image" content="IMG1.PNG" />
+    <meta property="og:image:alt" content="Preview photo from Memory Box" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Memory Box | First Anniversary" />
+    <meta name="twitter:description" content="A soft, private memory box full of our first anniversary moments." />
+    <meta name="twitter:image" content="IMG1.PNG" />
+    <link rel="icon" type="image/png" href="IMG1.PNG" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body class="is-loading">
+    <div class="ambient ambient-1" aria-hidden="true"></div>
+    <div class="ambient ambient-2" aria-hidden="true"></div>
+    <div class="particle-field" id="particleField" aria-hidden="true"></div>
+
+    <div class="loader" id="loader" role="status" aria-live="polite">
+      <div class="loader__orb"></div>
+      <p>loading our memories<span class="loader__dots">...</span></p>
+    </div>
+
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand" aria-label="Memory Box brand">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <div class="brand__copy">
+            <p>Memory Box</p>
+            <span>first anniversary</span>
+          </div>
+        </div>
+
+        <button class="icon-button" id="musicToggle" type="button" aria-pressed="false" aria-label="Toggle background music">
+          <span class="icon-button__glyph" aria-hidden="true"></span>
+          <span class="icon-button__label">music off</span>
+        </button>
+      </header>
+
+      <main>
+        <section class="hero section">
+          <div class="hero__copy reveal">
+            <span class="eyebrow">a digital box full of memories</span>
+            <h1>Memory Box</h1>
+            <p class="hero__subtitle">one year with you, and i'd still choose you every time</p>
+            <button class="primary-button" id="openBoxButton" type="button">open the box</button>
+          </div>
+
+          <div class="hero__visual reveal">
+            <button class="memory-box" id="memoryBox" type="button" aria-label="open the box">
+              <div class="memory-box__glow"></div>
+              <div class="memory-box__lid"></div>
+              <div class="memory-box__base"></div>
+              <div class="memory-box__ribbon memory-box__ribbon--vertical"></div>
+              <div class="memory-box__ribbon memory-box__ribbon--horizontal"></div>
+              <div class="memory-box__heart"></div>
+            </button>
+            <div class="box-popouts" id="boxPopouts"></div>
+            <p class="hero__note">soft, private, and made for us</p>
+          </div>
+        </section>
+
+      </main>
+
+      <footer class="footer">made with soft love, not loud words.</footer>
+    </div>
+
+    <button class="secret-heart" id="secretHeart" type="button" aria-label="Secret heart trigger">
+      <span class="secret-heart__icon" aria-hidden="true"></span>
+      <span class="secret-heart__count" id="secretCount">0/5</span>
+    </button>
+
+    <div class="modal" id="memoryModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="memoryModalTitle">
+      <div class="modal__backdrop" data-close-modal></div>
+      <div class="modal__panel" role="document">
+        <button class="modal__close" type="button" data-close-modal aria-label="Close memory modal">close</button>
+        <img class="modal__image" id="modalImage" alt="" />
+        <div class="modal__copy">
+          <span class="modal__date" id="modalDate"></span>
+          <h3 id="memoryModalTitle"></h3>
+          <p id="modalCaption"></p>
+        </div>
+      </div>
+    </div>
+
+    <section class="secret-overlay" id="secretOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="secretTitle">
+      <div class="secret-overlay__backdrop" data-close-secret></div>
+      <div class="secret-overlay__panel" role="document">
+        <button class="secret-overlay__close" type="button" data-close-secret aria-label="Close secret message">close</button>
+        <span class="secret-overlay__eyebrow">secret message</span>
+        <h2 id="secretTitle">one year with you isn't enough. i want more.</h2>
+        <p>for us, for the next chapter, and for every quiet day i still get to keep with you.</p>
+      </div>
+    </section>
+  </body>
+</html>
