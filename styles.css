@@ -571,7 +571,7 @@ body.box-open .box-popouts {
 body.box-open .popout-card {
   opacity: 1;
   filter: blur(0);
-  transform: translate(calc(-50% + var(--popout-x-active)), calc(-50% + var(--popout-y-active))) rotate(var(--popout-rotate-active)) scale(1.06);
+  transform: translate(calc(-50% + var(--popout-x-active)), calc(-50% + var(--popout-y-active) - 3.4rem)) rotate(var(--popout-rotate-active)) scale(1);
 }
 
 .popout-card__frame {
@@ -953,7 +953,7 @@ body.box-open .memory-box__glow {
   }
 
   body.box-open .popout-card {
-    transform: translate(calc(-50% + var(--popout-x-active)), calc(-50% + var(--popout-y-active))) rotate(var(--popout-rotate-active)) scale(0.9);
+    transform: translate(calc(-50% + var(--popout-x-active)), calc(-50% + var(--popout-y-active) - 2.7rem)) rotate(var(--popout-rotate-active)) scale(0.84);
   }
 
   .secret-heart {
