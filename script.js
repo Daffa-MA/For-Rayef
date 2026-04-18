@@ -5,6 +5,7 @@ const state = {
   musicOn: false,
   secretClicks: 0,
   loadingDone: false,
+  loadingStartedAt: 0,
   audioContext: null,
   audioFadeTimer: null,
   musicTimer: null,
@@ -138,12 +139,55 @@ const popoutItems = [
     delay: '620ms',
     z: 1,
   },
+  {
+    title: 'memory 07',
+    date: '',
+    caption: '',
+    image: 'IMG2.jpeg',
+    palette: ['#d6e3f4', '#f8fbff'],
+    accent: '#6f94c5',
+    width: 'clamp(5.4rem, 15vw, 7.4rem)',
+    widthMobile: 'clamp(4.6rem, 18vw, 6.1rem)',
+    aspectRatio: '3 / 4',
+    aspectRatioMobile: '3 / 4',
+    fit: 'cover',
+    x: 'clamp(15rem, 30vw, 22rem)',
+    y: 'clamp(0.8rem, 3vh, 3rem)',
+    rotate: '14deg',
+    mobileX: 'clamp(8.6rem, 30vw, 9.8rem)',
+    mobileY: 'clamp(0.8rem, 3vw, 1.4rem)',
+    mobileRotate: '12deg',
+    delay: '700ms',
+    z: 0,
+  },
+  {
+    title: 'memory 08',
+    date: '',
+    caption: '',
+    image: 'IMG3.jpeg',
+    palette: ['#dfe9f8', '#fafdff'],
+    accent: '#6f94c5',
+    width: 'clamp(5.4rem, 15vw, 7.4rem)',
+    widthMobile: 'clamp(4.6rem, 18vw, 6.1rem)',
+    aspectRatio: '3 / 4',
+    aspectRatioMobile: '3 / 4',
+    fit: 'cover',
+    x: 'clamp(-15rem, -30vw, -22rem)',
+    y: 'clamp(0.8rem, 3vh, 3rem)',
+    rotate: '-14deg',
+    mobileX: 'clamp(-8.6rem, -30vw, -9.8rem)',
+    mobileY: 'clamp(0.8rem, 3vw, 1.4rem)',
+    mobileRotate: '-12deg',
+    delay: '780ms',
+    z: 0,
+  },
 ];
 
 const elements = {
   body: document.body,
   loader: document.getElementById('loader'),
   particleField: document.getElementById('particleField'),
+  heroIntro: document.getElementById('heroIntro'),
   openBoxButton: document.getElementById('openBoxButton'),
   memoryBox: document.getElementById('memoryBox'),
   boxPopouts: document.getElementById('boxPopouts'),
@@ -597,7 +641,55 @@ function finishLoading() {
   }
 
   state.loadingDone = true;
-  elements.body.classList.remove('is-loading');
+  const minSplashDurationMs = prefersReducedMotion ? 0 : 1150;
+  const elapsedMs = performance.now() - state.loadingStartedAt;
+  const remainingMs = Math.max(0, minSplashDurationMs - elapsedMs);
+
+  window.setTimeout(() => {
+    elements.body.classList.remove('is-loading');
+    playHeroIntro();
+  }, remainingMs);
+}
+
+function playHeroIntro() {
+  if (!elements.heroIntro) {
+    return;
+  }
+
+  const introText = elements.heroIntro.dataset.text || getTrimmedText(elements.heroIntro.textContent);
+
+  if (!introText) {
+    return;
+  }
+
+  if (prefersReducedMotion) {
+    elements.heroIntro.textContent = introText;
+    elements.heroIntro.classList.add('is-complete');
+    elements.heroIntro.classList.remove('is-typing');
+    return;
+  }
+
+  elements.heroIntro.textContent = '';
+  elements.heroIntro.classList.remove('is-complete');
+  elements.heroIntro.classList.add('is-typing');
+
+  let characterIndex = 0;
+
+  const typeNextCharacter = () => {
+    characterIndex += 1;
+    elements.heroIntro.textContent = introText.slice(0, characterIndex);
+
+    if (characterIndex >= introText.length) {
+      elements.heroIntro.classList.remove('is-typing');
+      elements.heroIntro.classList.add('is-complete');
+      return;
+    }
+
+    const delay = characterIndex < 5 ? 95 : 45;
+    window.setTimeout(typeNextCharacter, delay);
+  };
+
+  window.setTimeout(typeNextCharacter, 320);
 }
 
 function waitForWindowLoad() {
@@ -637,6 +729,7 @@ function waitForMemoryImages(timeoutMs) {
 }
 
 function init() {
+  state.loadingStartedAt = performance.now();
   buildParticles();
   renderPopouts();
   setupRevealObserver();

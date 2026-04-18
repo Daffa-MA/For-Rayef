@@ -35,8 +35,13 @@
     <div class="particle-field" id="particleField" aria-hidden="true"></div>
 
     <div class="loader" id="loader" role="status" aria-live="polite">
-      <div class="loader__orb"></div>
-      <p>loading our memories<span class="loader__dots">...</span></p>
+      <div class="loader__panel">
+        <span class="loader__chip">Memory Box</span>
+        <div class="loader__orb" aria-hidden="true"></div>
+        <p class="loader__title">First Anniversary</p>
+        <p class="loader__line">Simple moments, always ours.</p>
+        <p class="loader__status">opening your memory box<span class="loader__dots">...</span></p>
+      </div>
     </div>
 
     <div class="page-shell">
@@ -60,6 +65,7 @@
           <div class="hero__copy reveal">
             <span class="eyebrow">a digital box full of memories</span>
             <h1>Memory Box</h1>
+            <p class="hero__intro" id="heroIntro" aria-live="polite" data-text="Simple moments, always ours.">Simple moments, always ours.</p>
             <p class="hero__subtitle">one year with you, and i'd still choose you every time</p>
             <button class="primary-button" id="openBoxButton" type="button">open the box</button>
           </div>
